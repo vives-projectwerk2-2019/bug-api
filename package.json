@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/vives-projectwerk2-2019/bug-api#readme",
   "dependencies": {
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
-    "mosca": "^2.8.3"
+    "mosca": "^2.8.3",
+    "ttn": "^2.3.1"
   }
 }
