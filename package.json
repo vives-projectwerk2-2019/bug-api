@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/vives-projectwerk2-2019/bug-api/issues"
   },
-  "homepage": "https://github.com/vives-projectwerk2-2019/bug-api#readme"
+  "homepage": "https://github.com/vives-projectwerk2-2019/bug-api#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mosca": "^2.8.3"
+  }
 }
