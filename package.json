@@ -1,0 +1,19 @@
+{
+  "name": "bug-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vives-projectwerk2-2019/bug-api.git"
+  },
+  "author": "",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/vives-projectwerk2-2019/bug-api/issues"
+  },
+  "homepage": "https://github.com/vives-projectwerk2-2019/bug-api#readme"
+}
