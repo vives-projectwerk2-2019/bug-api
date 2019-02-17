@@ -10,7 +10,7 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 
 
-// Mosca
+// Mosca broker
 const mosca = require('mosca')
 
 var moscaSettings = {
