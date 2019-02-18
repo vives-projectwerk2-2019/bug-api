@@ -1,3 +1,6 @@
+// Read .env
+require('dotenv').config()
+
 // Express router
 var router = require('./src/router')
 

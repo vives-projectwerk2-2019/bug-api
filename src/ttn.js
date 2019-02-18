@@ -1,4 +1,3 @@
-require('dotenv').config()
 var ttn = require("ttn")
 var appID = process.env.APP_ID
 var accessKey = process.env.ACCESS_KEY
