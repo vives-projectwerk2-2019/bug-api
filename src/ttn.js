@@ -7,7 +7,10 @@ if (appID && accessKey) {
         .then(function (client) {
             client.on("uplink", function (devID, payload) {
                 console.log("Received uplink from ", devID)
-                console.log(payload)
+                body = {
+                    data: payload.payload_fields.value
+                }
+                console.log(JSON.stringify(body));
             })
         })
         .catch(function (error) {
