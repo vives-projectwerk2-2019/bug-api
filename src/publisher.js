@@ -37,7 +37,8 @@ client.on('connect', function () {
                 });
               conn.query("SELECT username, password FROM users")
                 .then(rows => {
-                  console.log(rows);
+                  console.log(rows[0].username);
+                  console.log(rows[0].password);
                 });
 
               conn.end(); //release to pool
