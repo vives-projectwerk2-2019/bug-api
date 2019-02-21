@@ -38,13 +38,10 @@ client.on('connect', function () {
                 });
               conn.query("SELECT username FROM users")
                 .then(rows => {
-<<<<<<< HEAD
                   console.log(rows);
                   dataInput.Player.name = rows[0].username; //need to test
-=======
                   console.log(rows[0].username);
                   console.log(rows[0].password);
->>>>>>> 4f4bfd910eed2965029f3007eb881fa04c158d68
                 });
               conn.query("SELECT id FROM users")
                 .then(rows => {
