@@ -6,9 +6,9 @@ var client  = mqtt.connect('mqtt://127.0.0.1'); // ip van de server waarop de br
 //JSON string voor input events example
 var dataInput = {
     Player: {
-        name: "Jelle",
+        username: "",
         id: 1, 
-        input: "button", // don't know what this will be yet
+        input: "", // don't know what this will be yet
         joined: true
     },
     Controller: {
@@ -16,6 +16,7 @@ var dataInput = {
         addons: ["rocket", "speedboost", "anotherthing"]
     }
 };
+var myDataObj = JSON.stringify(dataInput); // ready to be send as JSON 
 
 //JSON string voor player update 
 
@@ -35,10 +36,16 @@ client.on('connect', function () {
                 .then(rows => {
                   console.log(rows);
                 });
-              conn.query("SELECT username, password FROM users")
+              conn.query("SELECT username FROM users")
                 .then(rows => {
                   console.log(rows);
+                  dataInput.Player.name = rows[0].username; //need to test
                 });
+              conn.query("SELECT id FROM users")
+                .then(rows => {
+                  console.log(rows);
+                  dataInput.Player.id = rows[0].id; //need to test
+                });  
 
               conn.end(); //release to pool
             })
