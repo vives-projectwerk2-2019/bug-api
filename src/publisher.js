@@ -1,7 +1,11 @@
 var mqtt = require('mqtt');
 var db = require('./db');
-
 var client  = mqtt.connect('mqtt://127.0.0.1'); // ip van de server waarop de broker zal staan
+
+function Publisher(button, newhardware){ //used for ttn data, http request needed instead of constructor
+  this.button = JSON.parse(button); 
+  this.newhardware = JSON.parse(newhardware);
+}
 
 //JSON string voor input events example
 var dataInput = {
@@ -17,9 +21,6 @@ var dataInput = {
     }
 };
 var myDataObj = JSON.stringify(dataInput); // ready to be send as JSON 
-
-//JSON string voor player update 
-
 
 client.on('connect', function () {
 
