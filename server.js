@@ -17,4 +17,3 @@ var broker = require('./src/broker')
 // Mqtt clients
 
 var publisher = require('./src/publisher')
-var subscriber = require('./src/subscriber')
