@@ -1,6 +1,6 @@
 var mqtt = require('mqtt')
 
-var client  = mqtt.connect('mqtt://127.0.0.1'); //ip van de server?
+var client  = mqtt.connect('mqtt://localhost'); //ip van de server?
 
 client.on('connect', function () {
     client.subscribe('API'); //subscribe op TTN
