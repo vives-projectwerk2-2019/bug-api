@@ -1,9 +1,14 @@
+/*THIS FILE WILL BE REFACTORED OVER TIME*/ 
+/*THIS FILE WILL BE REFACTORED OVER TIME*/ 
+/*THIS FILE WILL BE REFACTORED OVER TIME*/ 
+/*THIS FILE WILL BE REFACTORED OVER TIME*/ 
+
 var mqtt = require('mqtt');
 var db = require('./db');
 
 var client  = mqtt.connect('mqtt://localhost'); // ip van de server waarop de broker zal staan
 
-function Publisher(button, newhardware){ //used for ttn data, http request needed instead of constructor
+function Publisher(button, newhardware){ //not used for the moment
   this.button = JSON.parse(button); 
   this.newhardware = JSON.parse(newhardware);
 }
