@@ -13,20 +13,7 @@ function Publisher(button, newhardware){ //not used for the moment
   this.newhardware = JSON.parse(newhardware);
 }
 
-//JSON string voor input events example
-var dataInput = {
-    Player: {
-        username: "",
-        id: 1, 
-        input: "", // don't know what this will be yet
-        joined: true
-    },
-    Controller: {
-        id: null,
-        addons: ["rocket", "speedboost", "anotherthing"]
-    }
-};
-var myDataObj = JSON.stringify(dataInput); // ready to be send as JSON 
+
 
 client.on('connect', function () {
 
