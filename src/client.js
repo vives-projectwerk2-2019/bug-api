@@ -1,7 +1,7 @@
 
 
 var mqtt = require('mqtt')
-var client  = mqtt.connect('mqtt://labict.be'); //ip van de server?
+var client  = mqtt.connect('mqtt://mqtt.labict.be'); //ip van de server?
 
 //JSON string voor input events example
 var dataObject = {
@@ -23,7 +23,7 @@ var myDataObj = JSON.stringify(dataObject); // ready to be send as JSON
 client.on('connect', function () {
     client.subscribe('TTN', function(err){ //subscribe op TTN
         if(!err){
-            client.publish('game', dataObj)
+            //client.publish('game', dataObj)
         }
     }) 
 })
