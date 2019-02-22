@@ -30,6 +30,6 @@ client.on('connect', function () {
 
 client.on('message', function (topic, message) {
     //TODO:how will the format be? How to process information?
-    ttndata = JSON.parse(message); //message will be a JSON string need to parse, format will be {button:2, dev_id: 3}
+    ttndata = message.toString(); //message will be a JSON string need to parse, format will be {button:2, dev_id: 3}
     console.log("Subscriber: " + ttndata);
 })
