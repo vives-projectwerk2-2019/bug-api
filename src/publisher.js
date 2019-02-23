@@ -17,7 +17,7 @@ function Publisher(button, newhardware){ //not used for the moment
 
 client.on('connect', function () {
 
-    setInterval(function() {
+    //setInterval(function() {
         client.publish('API', 'Hello mqtt'); TODO://publish to game server in JSON format
         console.log('Publisher: Message Sent');
 
@@ -49,5 +49,5 @@ client.on('connect', function () {
               console.log("not connected due to error: " + err);
             });
 
-    }, 1000);
+    //}, 1000);
 });
