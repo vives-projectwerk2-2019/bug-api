@@ -23,7 +23,7 @@ var myDataObj = JSON.stringify(dataObject); // ready to be send as JSON
 client.on('connect', function () {
     client.subscribe('TTN', function(err){ //subscribe op TTN
         if(!err){
-            //client.publish('game', dataObj)
+            client.publish('game', myDataObj)
         }
     }) 
 })
