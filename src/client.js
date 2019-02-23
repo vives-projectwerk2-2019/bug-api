@@ -23,13 +23,14 @@ var myDataObj = JSON.stringify(dataObject); // ready to be send as JSON
 client.on('connect', function () {
     client.subscribe('TTN', function(err){ //subscribe op TTN
         if(!err){
-            //client.publish('game', dataObj)
+            client.publish('game', myDataObj)
+            console.log("Publisher: " + myDataObj)
         }
     }) 
 })
 
 client.on('message', function (topic, message) {
     //TODO:how will the format be? How to process information?
-    ttndata = message.toString(); //message will be a JSON string need to parse, format will be {button:2, dev_id: 3}
-    console.log("Subscriber: " + ttndata);
+    ttndata = JSON.parse(ttndata); //message will be a JSON string need to parse, format will be {button:2, dev_id: 3}
+    console.log("Subscriber: 1)" + ttndata.button);
 })
