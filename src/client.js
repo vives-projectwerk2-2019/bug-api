@@ -1,5 +1,6 @@
 var mqtt = require('mqtt')
-var client  = mqtt.connect('mqtt://mqtt.labict.be'); //ip van de server?
+var client  = mqtt.connect('mqtt://labict.be'); //ip van de server?
+var ttndata = "";
 
 //JSON string voor input events example static
 var dataObject = {
@@ -22,8 +23,8 @@ client.on('connect', function () {
     setInterval(() => {
         client.subscribe('TTN', function(err){ //subscribe op TTN
             if(!err){
-                client.publish('game', myDataObj)
-                console.log("Publisher: " + myDataObj)
+                client.publish('game', myDataObj);
+                console.log("Publisher: " + myDataObj);
             }
         }) 
     }, 1000);
@@ -31,7 +32,7 @@ client.on('connect', function () {
 
 client.on('message', function (topic, message) {
     //TODO:how will the format be? How to process information?
-    ttndata = JSON.parse(message); //message will be a JSON string need to parse, format will be {button:2, dev_id: 3}
-    dataObject.Player.button = ttndata.button;
-    console.log("Subscriber: Button: " + ttndata.button);
+    ttndata = message.toString(); //message will be a JSON string need to parse, format will be {button:2, dev_id: 3}
+    dataObject.Player.username = "Jelle";
+    console.log("Subscriber: Button: " + ttndata);
 })
