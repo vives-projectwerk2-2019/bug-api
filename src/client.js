@@ -1,5 +1,3 @@
-
-
 var mqtt = require('mqtt')
 var client  = mqtt.connect('mqtt://mqtt.labict.be'); //ip van de server?
 
@@ -33,7 +31,7 @@ client.on('connect', function () {
 
 client.on('message', function (topic, message) {
     //TODO:how will the format be? How to process information?
-    ttndata = JSON.parse(ttndata); //message will be a JSON string need to parse, format will be {button:2, dev_id: 3}
+    ttndata = JSON.parse(message); //message will be a JSON string need to parse, format will be {button:2, dev_id: 3}
     dataObject.Player.button = ttndata.button;
     console.log("Subscriber: Button: " + ttndata.button);
 })
