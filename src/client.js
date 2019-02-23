@@ -6,33 +6,42 @@ var ttndata = "";
 var dataObject = {
     Player: {
         username: "",
-        id: 1, 
-        button: "", // don't know what this will be yet
+        dev_id: null, 
+        button: null, // don't know what this will be yet
         joined: true
     },
     Controller: {
-        id: null,
-        addons: ["rocket", "speedboost", "anotherthing"]
+        id: 0,
+        addons: {
+            add_1: 0,
+            add_2: 0,
+            add_3: 0
+        }, 
+        dev_id: ""
     }
 };
 //This will subscribe the client on TTN and publish the right JSON object to game server!
 
 client.on('connect', function () {
-    setInterval(() => {
-        client.subscribe('TTN', function(err){ //subscribe op TTN
-            if(!err){
-                dataObject.Player.username = "LOL";
-                dataObject.Player.button = ttndata;
-                client.publish('game', JSON.stringify(dataObject));
-                console.log("Publisher: " + JSON.stringify(dataObject));
-            }
-        }) 
-    }, 1000);
+        client.subscribe('TTN');
 })
 
 client.on('message', function (topic, message) {
     //TODO:how will the format be? How to process information?
-    ttndata = message.toString(); //message will be a JSON string need to parse, format will be {button:2, dev_id: 3}
+    ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse, format will be {button:2, dev_id: 3} THIS will only cover ttndata
+
+    //PLAYER
+    dataObject.Player.username = ""; //this needs to come from db
+    dataObject.Player.button = ttndata.button;
+    dataObject.Player.dev_id = ttndata.dev_id;
+
+    //CONTROLLER
+    dataObject.Controller.id = ttndata.id;
+    dataObject.Controller.addons.add_1 = ttndata.add_1;
+    dataObject.Controller.addons.add_2 = ttndata.add_2;
+    dataObject.Controller.addons.add_3 = ttndata.add_3;
+    dataObject.Controller.dev_id = ttndata.dev_id;
     
-    console.log("Subscriber: Button: " + ttndata);
+    client.publish('game', JSON.stringify(dataObject));
+    console.log("Publisher: " + JSON.stringify(dataObject));
 })
