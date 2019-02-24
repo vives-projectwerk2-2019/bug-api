@@ -10,11 +10,6 @@ db.initialize(function(err) {
 // Express router
 var router = require('./src/router')
 
-// Mosca broker
-var broker = require('./src/broker')
-
-
 // Mqtt clients
-
 var publisher = require('./src/publisher')
 var client = require('./src/client.js')
