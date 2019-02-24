@@ -6,7 +6,7 @@
 var mqtt = require('mqtt');
 var db = require('./db');
 
-var client  = mqtt.connect('mqtt://localhost'); // ip van de server waarop de broker zal staan
+var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST); // ip van de server waarop de broker zal staan
 
 function Publisher(button, newhardware){ //not used for the moment
   this.button = JSON.parse(button); 
