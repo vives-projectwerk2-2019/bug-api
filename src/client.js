@@ -32,7 +32,7 @@ client.on('message', function (topic, message) {
     ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse, format will be {button:2, dev_id: 3} THIS will only cover ttndata
 
     //PLAYER
-    dataObject.Player.username = "Jelle"; //this needs to come from db
+    dataObject.Player.username = "TEST"; //this needs to come from db
     dataObject.Player.action = ttndata.action;
     dataObject.Player.movement = ttndata.movement;
     dataObject.Player.dev_id = ttndata.dev_id;
