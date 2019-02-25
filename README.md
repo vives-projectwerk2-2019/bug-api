@@ -5,6 +5,7 @@
 npm install
 npm start
 ```
+De client.js zal subscriben op de TTN topic, daarna wordt de data verwerkt en doorgestuurd naar de game topic in een JSON object.
 
 ## Running in docker
 ```
