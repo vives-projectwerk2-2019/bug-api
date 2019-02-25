@@ -13,11 +13,7 @@ var dataObject = {
     },
     Controller: {
         id: 0,
-        addons: {
-            add_1: 0,
-            add_2: 0,
-            add_3: 0
-        }, 
+        addons: [null, null, null], 
         dev_id: ""
     }
 };
@@ -39,9 +35,10 @@ client.on('message', function (topic, message) {
 
     //CONTROLLER
     dataObject.Controller.id = ttndata.id;
-    dataObject.Controller.addons.add_1 = ttndata.add_1;
-    dataObject.Controller.addons.add_2 = ttndata.add_2;
-    dataObject.Controller.addons.add_3 = ttndata.add_3;
+   
+    dataObject.Controller.addons[0] = ttndata.add_1;
+    dataObject.Controller.addons[1]= ttndata.add_2;
+    dataObject.Controller.addons[2] = ttndata.add_3;
     dataObject.Controller.dev_id = ttndata.dev_id;
     
     client.publish('game', JSON.stringify(dataObject));
