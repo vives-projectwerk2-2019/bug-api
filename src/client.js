@@ -42,8 +42,13 @@ var jsonschemaController = {
 
 //JSON schema for JSON object 'dataObject'
 var schemaObject = {
-    
-}
+    "id": "/SchemaObject",
+    "type": "object",
+    "properties": {
+        "Player": {"$ref": "/SchemaPlayer"},
+        "Controller": {"$ref": "/SchemaController"}
+    }
+};
 
 /*./src/http.js requiren om daarna functies aan te roepen voor deze file */
 
