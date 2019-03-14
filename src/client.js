@@ -1,4 +1,3 @@
-var mqtt = require('mqtt')
 var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST); //ip van de server?
 var ttndata = "";
 
