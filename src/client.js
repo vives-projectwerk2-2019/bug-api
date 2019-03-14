@@ -3,9 +3,30 @@ var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST); //ip van de ser
 var ttndata = "";
 //var http = require('http.js');
 
-//Validating JSON objects
+//Validating JSON objects, I'll be working with split schemas and references.
 var Validator = require('jsonschema').Validator;
 var v = new Validator();
+
+var jsonschemaPlayer = {
+    "id": "/SchemaPlayer",
+    "type": "object",
+    "properties": {
+        "username": {"type": "string"},
+        "movement": {
+            "type": ["string", null]
+        },
+        "dev_id": {"type": "string"},
+        "action": {
+            "type": ["string", null]
+        },
+        "joined": {"type": "boolean"},
+    }
+};
+
+//JSON schema for JSON object 'dataObject'
+var schemaObject = {
+    
+}
 
 /*./src/http.js requiren om daarna functies aan te roepen voor deze file */
 
