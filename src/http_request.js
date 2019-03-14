@@ -1,6 +1,6 @@
 var http = require('http');
 var urldata = {
-   host: 'http://kiosk/users',
+   host: 'http://localhost:8000/api/user',
    path: '/acsearch',
    method: 'GET'
 }
@@ -14,6 +14,8 @@ function OnResponse(response) {
     response.on('end', function() {
         console.log(data);
     });
- }
+   }
+
+   fetch(urldata)
 
  http.request(urldata, OnResponse).end();
