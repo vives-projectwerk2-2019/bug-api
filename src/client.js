@@ -3,11 +3,11 @@ var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST); //ip van de ser
 var ttndata = "";
 //var http = require('http.js');
 
-//Validating JSON objects, I'll be working with split schemas and references.
+/* Validating JSON objects section, I'll be working with split schemas and references. */
 var Validator = require('jsonschema').Validator;
 var v = new Validator();
 
-//split schema for Player
+/* Split schema for Player */
 var jsonschemaPlayer = {
     "id": "/SchemaPlayer",
     "type": "object",
@@ -24,7 +24,7 @@ var jsonschemaPlayer = {
     }
 };
 
-//split schema for Controller
+/* Split schema for Controller */
 var jsonschemaController = {
     "id": "/SchemaController",
     "type": "object",
@@ -40,7 +40,7 @@ var jsonschemaController = {
     }
 };
 
-//JSON schema for JSON object 'dataObject'
+/* JSON schema for JSON object 'dataObject' */
 var schemaObject = {
     "id": "/SchemaObject",
     "type": "object",
@@ -50,6 +50,7 @@ var schemaObject = {
     }
 };
 
+/* End of validating JSON objects with schema */
 /*./src/http.js requiren om daarna functies aan te roepen voor deze file */
 
 //JSON string voor input events example static
