@@ -67,6 +67,9 @@ var schemaObject = {
     }
 };
 
+v.addSchema(jsonschemaPlayer, '/SchemaPlayer');
+v.addSchema(jsonschemaController, '/SchemaController');
+
 /* End of validating JSON objects with schema */
 
 //This will subscribe the client on TTN and publish the right JSON object to game server!
@@ -90,7 +93,14 @@ client.on('message', function (topic, message) {
     dataObject.Controller.addons[1]= ttndata.add_2;
     dataObject.Controller.addons[2] = ttndata.add_3;
     dataObject.Controller.dev_id = ttndata.dev_id;
-    
-    client.publish('game', JSON.stringify(dataObject));
-    console.log("Publisher: " + JSON.stringify(dataObject));
+
+    //VALIDATION WITH SCHEMA AND SEND
+    if(v.validate(dataObject, schemaObject).valid)
+    {
+        client.publish('game', JSON.stringify(dataObject));
+        console.log(v.validate(dataObject, schemaObject));
+        console.log("Publisher: " + JSON.stringify(dataObject));
+    } else {
+        console.log("The object isn't validated!!")
+    }
 })
