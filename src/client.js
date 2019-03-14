@@ -2,7 +2,7 @@
 var mqtt = require('mqtt')
 var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST); //ip van de server?
 var ttndata = "";
-//var http = require('http.js');
+var http = require('./http_request');
 
 /* Validating JSON objects section, I'll be working with split schemas and references. */
 var Validator = require('jsonschema').Validator;
