@@ -2,6 +2,8 @@ var mqtt = require('mqtt')
 var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST); //ip van de server?
 var ttndata = "";
 
+/*./src/http.js requiren om daarna functies aan te roepen voor deze file */
+
 //JSON string voor input events example static
 var dataObject = {
     Player: {
