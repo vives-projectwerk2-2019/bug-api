@@ -3,6 +3,10 @@ var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST); //ip van de ser
 var ttndata = "";
 //var http = require('http.js');
 
+//Validating JSON objects
+var Validator = require('jsonschema').Validator;
+var v = new Validator();
+
 /*./src/http.js requiren om daarna functies aan te roepen voor deze file */
 
 //JSON string voor input events example static
