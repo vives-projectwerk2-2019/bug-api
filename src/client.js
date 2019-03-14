@@ -101,6 +101,6 @@ client.on('message', function (topic, message) {
         console.log(v.validate(dataObject, schemaObject));
         console.log("Publisher: " + JSON.stringify(dataObject));
     } else {
-        console.log("The object isn't validated!!")
+        console.log("The object isn't valid!!")
     }
 })
