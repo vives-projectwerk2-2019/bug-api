@@ -7,6 +7,7 @@ var ttndata = "";
 var Validator = require('jsonschema').Validator;
 var v = new Validator();
 
+//split schema for Player
 var jsonschemaPlayer = {
     "id": "/SchemaPlayer",
     "type": "object",
@@ -20,6 +21,22 @@ var jsonschemaPlayer = {
             "type": ["string", null]
         },
         "joined": {"type": "boolean"},
+    }
+};
+
+//split schema for Controller
+var jsonschemaController = {
+    "id": "/SchemaController",
+    "type": "object",
+    "properties": {
+        "id": {"type": "integer"},
+        "addons": {
+            "type": "array",
+            "items":  {
+                "type": ["integer", null]
+            }
+        },
+        "dev_id": {"type": "string"}
     }
 };
 
