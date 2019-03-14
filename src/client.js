@@ -1,3 +1,4 @@
+/*./src/http.js requiren om daarna functies aan te roepen voor deze file */
 var mqtt = require('mqtt')
 var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST); //ip van de server?
 var ttndata = "";
@@ -6,6 +7,22 @@ var ttndata = "";
 /* Validating JSON objects section, I'll be working with split schemas and references. */
 var Validator = require('jsonschema').Validator;
 var v = new Validator();
+
+/* The actual data object that needs to be validated before sending to game */
+var dataObject = {
+    Player: {
+        username: "",
+        movement: null,
+        dev_id: null, 
+        action: null, 
+        joined: true
+    },
+    Controller: {
+        id: 0,
+        addons: [null, null, null], 
+        dev_id: ""
+    }
+};
 
 /* Split schema for Player */
 var jsonschemaPlayer = {
@@ -51,35 +68,17 @@ var schemaObject = {
 };
 
 /* End of validating JSON objects with schema */
-/*./src/http.js requiren om daarna functies aan te roepen voor deze file */
 
-//JSON string voor input events example static
-var dataObject = {
-    Player: {
-        username: "",
-        movement: null,
-        dev_id: null, 
-        action: null, // don't know what this will be yet
-        joined: true
-    },
-    Controller: {
-        id: 0,
-        addons: [null, null, null], 
-        dev_id: ""
-    }
-};
 //This will subscribe the client on TTN and publish the right JSON object to game server!
-
 client.on('connect', function () {
         client.subscribe('TTN');
 })
 
 client.on('message', function (topic, message) {
-    //TODO:how will the format be? How to process information?
-    ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse, format will be {button:2, dev_id: 3} THIS will only cover ttndata
+    ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
 
     //PLAYER
-    dataObject.Player.username = "TEST"; //this needs to come from db
+    dataObject.Player.username = "TEST"; //this needs to come from db, I still can't work further on this
     dataObject.Player.action = ttndata.action;
     dataObject.Player.movement = ttndata.movement;
     dataObject.Player.dev_id = ttndata.dev_id;
