@@ -5,7 +5,7 @@ var ttndata = "";
 //var http = require('./http_request');
 
 var Jsonvalidator = require('./jsonvalidator');
-var jsonv = new Jsonvalidator();
+
 
 /* The actual data object that needs to be validated before sending to game */
 var dataObject = {
@@ -30,7 +30,10 @@ client.on('connect', function () {
 // data validation ttn doesnt validate due to lazy evaluation
 client.on('message', function (topic, message) {
     ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
-    console.log(ttndata);
+    //console.log(ttndata);
+    var jsonv = new Jsonvalidator(ttndata);
+    console.log(jsonv.checkValidttndata());
+
     if(jsonv.checkValidttndata(ttndata)){
         //PLAYER
         dataObject.Player.username = "TEST"; //this needs to come from db, I still can't work further on this
@@ -46,11 +49,8 @@ client.on('message', function (topic, message) {
         dataObject.Controller.addons[2] = ttndata.add_3;
         dataObject.Controller.dev_id = ttndata.dev_id;
 
-        client.publish('game', JSON.stringify(dataObject));
-        //console.log(v.validate(dataObject, schemaObject));
-        console.log("Publisher: " + JSON.stringify(dataObject));
-    }
-    else {
-        console.log("ttndata isn't valid!");
+        // client.publish('game', JSON.stringify(dataObject));
+        // //console.log(v.validate(dataObject, schemaObject));
+        // console.log("Publisher: " + JSON.stringify(dataObject));
     }
 })

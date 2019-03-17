@@ -3,14 +3,22 @@ var Validator = require('jsonschema').Validator;
 var v = new Validator();
 
 class Jsonvalidator{
-    constructor(){};
+    constructor(data){
+        this.data = data;
+    };
 
-    checkValidttndata(ttndata){
-        if((v.validate(ttndata, schemaNewhardware).valid) || (v.validate(ttndata, schemaButton).valid)){ //wrong validation because we need 2 different topics from the ttn
+    checkValidttndata(){
+        var ttndata = this.data;
+        var hardwaredata = v.validate(ttndata, schemaNewhardware);
+        var buttondata = v.validate(ttndata, schemaButton);
+        //.valid is needed to check if it's correct, tested that!
+        //this will check both schemas if it's valid, but it will send false everytime when hardware has a wrong
+        if((hardwaredata.valid) && (buttondata.valid)){ //wrong validation because we need 2 different topics from the ttn
             return true;
-        }else{
-            console.log("Errors for schemaNewhardware: " + v.validate(ttndata, schemaNewhardware).errors + 
-            "\n" + "Errors for schemaButton: " + v.validate(ttndata, schemaButton).errors); //need to give errors when false
+        }
+        else{
+            console.log("Errors for schemaNewhardware: " + hardwaredata.errors + 
+            "\n" + "Errors for schemaButton: " + buttondata.errors); //need to give errors when false
             return false;
         }
     }
