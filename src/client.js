@@ -1,8 +1,12 @@
 /*./src/http.js requiren om daarna functies aan te roepen voor deze file */
-var mqtt = require('mqtt')
+var mqtt = require('mqtt');
 var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST); //ip van de server?
 var ttndata = "";
 //var http = require('./http_request');
+
+var Jsonvalidator = require('./jsonvalidator');
+var jsonv = new Jsonvalidator();
+
 
 /* Validating JSON objects section, I'll be working with split schemas and references. */
 var Validator = require('jsonschema').Validator;
@@ -80,27 +84,29 @@ client.on('connect', function () {
 client.on('message', function (topic, message) {
     ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
 
-    //PLAYER
-    dataObject.Player.username = "TEST"; //this needs to come from db, I still can't work further on this
-    dataObject.Player.action = ttndata.action;
-    dataObject.Player.movement = ttndata.movement;
-    dataObject.Player.dev_id = ttndata.dev_id;
+    if(jsonv.checkValid(ttndata)){
+        //PLAYER
+        dataObject.Player.username = "TEST"; //this needs to come from db, I still can't work further on this
+        dataObject.Player.action = ttndata.action;
+        dataObject.Player.movement = ttndata.movement;
+        dataObject.Player.dev_id = ttndata.dev_id;
 
-    //CONTROLLER
-    dataObject.Controller.id = ttndata.id;
-   
-    dataObject.Controller.addons[0] = ttndata.add_1;
-    dataObject.Controller.addons[1]= ttndata.add_2;
-    dataObject.Controller.addons[2] = ttndata.add_3;
-    dataObject.Controller.dev_id = ttndata.dev_id;
+        //CONTROLLER
+        dataObject.Controller.id = ttndata.id;
+    
+        dataObject.Controller.addons[0] = ttndata.add_1;
+        dataObject.Controller.addons[1]= ttndata.add_2;
+        dataObject.Controller.addons[2] = ttndata.add_3;
+        dataObject.Controller.dev_id = ttndata.dev_id;
 
-    //VALIDATION WITH SCHEMA AND SEND
-    if(v.validate(dataObject, schemaObject).valid)
-    {
-        client.publish('game', JSON.stringify(dataObject));
-        console.log(v.validate(dataObject, schemaObject));
-        console.log("Publisher: " + JSON.stringify(dataObject));
-    } else {
-        console.log("The object isn't valid!!")
+        if(v.validate(dataObject, schemaObject).valid)
+        {
+            client.publish('game', JSON.stringify(dataObject));
+            //console.log(v.validate(dataObject, schemaObject));
+            console.log("Publisher: " + JSON.stringify(dataObject));
+        } else {
+            console.log("The object isn't valid!!")
+
+        }
     }
 })
