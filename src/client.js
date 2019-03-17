@@ -30,7 +30,7 @@ client.on('connect', function () {
 
 client.on('message', function (topic, message) {
     ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
-
+    
     if(jsonv.checkValidttndata(ttndata)){
         //PLAYER
         dataObject.Player.username = "TEST"; //this needs to come from db, I still can't work further on this

@@ -9,6 +9,7 @@ class Jsonvalidator{
         if((v.validate(ttndata, schemaNewhardware).valid) || (v.validate(ttndata, schemaButton).valid)){
             return true;
         }else{
+            console.log(); //need to give errors when false
             return false;
         }
     }
