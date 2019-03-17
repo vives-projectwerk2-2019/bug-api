@@ -30,18 +30,20 @@ client.on('connect', function () {
 // data validation ttn doesnt validate due to lazy evaluation
 client.on('message', function (topic, message) {
     ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
-    //console.log(ttndata);
     var jsonv = new Jsonvalidator(ttndata);
-    //console.log(jsonv.checkValidttndata());
 
-    if(jsonv.checkValidttndata(ttndata)){
+    if(jsonv.checkValidttndatabutton(ttndata)){
         //PLAYER
         dataObject.Player.username = "TEST"; //this needs to come from db, I still can't work further on this
         dataObject.Player.action = ttndata.action;
         dataObject.Player.movement = ttndata.movement;
         dataObject.Player.dev_id = ttndata.dev_id;
 
+        client.publish('game', JSON.stringify(dataObject));
+        console.log("Publisher: " + JSON.stringify(dataObject));
+    }
         //CONTROLLER
+    if(jsonv.checkValidttndatahardware(ttndata)){
         dataObject.Controller.id = ttndata.id;
     
         dataObject.Controller.addons[0] = ttndata.add_1;
@@ -50,7 +52,7 @@ client.on('message', function (topic, message) {
         dataObject.Controller.dev_id = ttndata.dev_id;
 
         client.publish('game', JSON.stringify(dataObject));
-        //console.log(v.validate(dataObject, schemaObject));
         console.log("Publisher: " + JSON.stringify(dataObject));
+    
     }
 })
