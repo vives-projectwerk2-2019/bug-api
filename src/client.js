@@ -7,11 +7,6 @@ var ttndata = "";
 var Jsonvalidator = require('./jsonvalidator');
 var jsonv = new Jsonvalidator();
 
-
-/* Validating JSON objects section, I'll be working with split schemas and references. */
-var Validator = require('jsonschema').Validator;
-var v = new Validator();
-
 /* The actual data object that needs to be validated before sending to game */
 var dataObject = {
     Player: {
@@ -27,54 +22,6 @@ var dataObject = {
         dev_id: ""
     }
 };
-
-/* Split schema for Player */
-var jsonschemaPlayer = {
-    "id": "/SchemaPlayer",
-    "type": "object",
-    "properties": {
-        "username": {"type": "string"},
-        "movement": {
-            "type": ["string", null]
-        },
-        "dev_id": {"type": "string"},
-        "action": {
-            "type": ["string", null]
-        },
-        "joined": {"type": "boolean"},
-    }
-};
-
-/* Split schema for Controller */
-var jsonschemaController = {
-    "id": "/SchemaController",
-    "type": "object",
-    "properties": {
-        "id": {"type": "integer"},
-        "addons": {
-            "type": "array",
-            "items":  {
-                "type": ["integer", null]
-            }
-        },
-        "dev_id": {"type": "string"}
-    }
-};
-
-/* JSON schema for JSON object 'dataObject' */
-var schemaObject = {
-    "id": "/SchemaObject",
-    "type": "object",
-    "properties": {
-        "Player": {"$ref": "/SchemaPlayer"},
-        "Controller": {"$ref": "/SchemaController"}
-    }
-};
-
-v.addSchema(jsonschemaPlayer, '/SchemaPlayer');
-v.addSchema(jsonschemaController, '/SchemaController');
-
-/* End of validating JSON objects with schema */
 
 //This will subscribe the client on TTN and publish the right JSON object to game server!
 client.on('connect', function () {
@@ -99,14 +46,11 @@ client.on('message', function (topic, message) {
         dataObject.Controller.addons[2] = ttndata.add_3;
         dataObject.Controller.dev_id = ttndata.dev_id;
 
-        if(v.validate(dataObject, schemaObject).valid)
-        {
-            client.publish('game', JSON.stringify(dataObject));
-            //console.log(v.validate(dataObject, schemaObject));
-            console.log("Publisher: " + JSON.stringify(dataObject));
-        } else {
-            console.log("The object isn't valid!!")
-
-        }
+        client.publish('game', JSON.stringify(dataObject));
+        //console.log(v.validate(dataObject, schemaObject));
+        console.log("Publisher: " + JSON.stringify(dataObject));
+    }
+    else {
+        console.log("ttndata isn't valid!");
     }
 })
