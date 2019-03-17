@@ -6,7 +6,7 @@ class Jsonvalidator{
     constructor(){};
 
     checkValidttndata(ttndata){
-        if((v.validate(ttndata, schemaNewhardware).valid) || (!v.validate(ttndata, schemaButton).valid)){
+        if((v.validate(ttndata, schemaNewhardware).valid) || (v.validate(ttndata, schemaButton).valid)){ //wrong validation because we need 2 different topics from the ttn
             return true;
         }else{
             console.log("Errors for schemaNewhardware: " + v.validate(ttndata, schemaNewhardware).errors + 
@@ -46,6 +46,7 @@ var schemaNewhardware = {
         "add_1" : {"type" : "integer"},
         "add_2" : {"type" : "integer"},
         "add_3" : {"type" : "integer"},
+        "dev_id": {"type" : "string"}
     },
     "required": ["id", "add_1" , "add_2" , "add_3"]
 };
