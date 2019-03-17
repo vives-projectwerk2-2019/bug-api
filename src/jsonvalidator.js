@@ -5,12 +5,16 @@ var v = new Validator();
 class Jsonvalidator{
     constructor(){};
 
-    checkValid(ttndata){
+    checkValidttndata(ttndata){
         if((v.validate(ttndata, schemaNewhardware).valid) || (v.validate(ttndata, schemaButton).valid)){
             return true;
         }else{
             return false;
         }
+    }
+
+    checkValidclientdata(clientdata){
+        
     }
 };
 module.exports = Jsonvalidator
