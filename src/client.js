@@ -27,10 +27,10 @@ var dataObject = {
 client.on('connect', function () {
         client.subscribe('TTN');
 })
-
+// data validation ttn doesnt validate due to lazy evaluation
 client.on('message', function (topic, message) {
     ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
-
+    console.log(ttndata);
     if(jsonv.checkValidttndata(ttndata)){
         //PLAYER
         dataObject.Player.username = "TEST"; //this needs to come from db, I still can't work further on this
