@@ -28,10 +28,11 @@ var schemaButton = {
     "id": "/schemaButton",
     "type": "object",
     "properties": {
-        "movemenst": {"type": "string"},
+        "movements": {"type": "string"},
         "action":  {"type": "string"},
         "dev_id":  {"type": "string"}
-    }
+    },
+    "required": ["dev_id"]
 };
 
 
@@ -39,11 +40,12 @@ var schemaNewhardware = {
     "id" : "/schemaNewhardware",
     "type" : "object",
     "properties" : {
-        "id" : {"type" : "int"},
-        "add_1" : {"type" : "int"},
-        "add_2" : {"type" : "int"},
-        "add_3" : {"type" : "int"},
-    }
+        "id" : {"type" : "integer"},
+        "add_1" : {"type" : "integer"},
+        "add_2" : {"type" : "integer"},
+        "add_3" : {"type" : "integer"},
+    },
+    "required": ["id", "add_1" , "add_2" , "add_3"]
 };
 
 /* Schemas for validating client data */
