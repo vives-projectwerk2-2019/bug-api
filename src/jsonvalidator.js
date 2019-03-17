@@ -11,13 +11,14 @@ class Jsonvalidator{
         var ttndata = this.data;
         var hardwaredata = v.validate(ttndata, schemaNewhardware);
 
-        if(hardwaredata.valid){
-            return true;
-        }else {
+        if(!hardwaredata.valid){
             console.log("Errors for schemaButton: " + hardwaredata.errors);
             return false;
+        }else {
+            return hardwaredata.valid;
         }
     }
+
     checkValidttndatabutton(){
         var ttndata = this.data;
         var buttondata = v.validate(ttndata, schemaButton);
@@ -40,7 +41,9 @@ class Jsonvalidator{
         }
     }
 };
+
 module.exports = Jsonvalidator
+
 /* Schemas for validating ttndata */
 var schemaButton = {
     "id": "/schemaButton",
@@ -52,7 +55,6 @@ var schemaButton = {
     },
     "required": ["dev_id"]
 };
-
 
 var schemaNewhardware = {
     "id" : "/schemaNewhardware",
