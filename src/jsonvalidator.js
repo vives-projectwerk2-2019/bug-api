@@ -6,17 +6,19 @@ class Jsonvalidator{
     constructor(){};
 
     checkValidttndata(ttndata){
-        if((v.validate(ttndata, schemaNewhardware).valid) || (v.validate(ttndata, schemaButton).valid)){
+        if((v.validate(ttndata, schemaNewhardware).valid) || (!v.validate(ttndata, schemaButton).valid)){
             return true;
         }else{
-            console.log(); //need to give errors when false
+            console.log("Errors for schemaNewhardware: " + v.validate(ttndata, schemaNewhardware).errors + 
+            "\n" + "Errors for schemaButton: " + v.validate(ttndata, schemaButton).errors); //need to give errors when false
             return false;
         }
     }
 
     checkValidclientdata(clientdata){ //THIS WILL BE USED IN GROUP GAME
         if(!v.validate(clientdata, schemaObject).valid){
-            return "Client data is not validated";
+            console.log("Errors for clientdata: " + v.validate(clientdata, schemaObject).errors); 
+            return false;
         }else {
             return true;
         }
