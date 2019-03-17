@@ -22,12 +22,12 @@ var urldata = {
 
 //  http.request(urldata, OnResponse).end();
 
- /* How to get a user with given ID */
-fetch('http://localhost:8000/api/user')
-  .then(response => response.json())
-  .then(data => console.log(data))
+//  /* How to get a user with given ID */
+// fetch('http://localhost:8000/api/user')
+//   .then(response => response.json())
+//   .then(data => console.log(data))
 
-  /* Get All users */
-fetch('http://localhost:8000/api/user')
-   .then(response => response.json())
-   .then(data => console.log(data))
+//   /* Get All users */
+// fetch('http://localhost:8000/api/user')
+//    .then(response => response.json())
+//    .then(data => console.log(data))
