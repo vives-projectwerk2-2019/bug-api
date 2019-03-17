@@ -13,8 +13,14 @@ class Jsonvalidator{
         var buttondata = v.validate(ttndata, schemaButton);
         //.valid is needed to check if it's correct, tested that!
         //this will check both schemas if it's valid, but it will send false everytime when hardware has a wrong
-        if((hardwaredata.valid) && (buttondata.valid)){ //wrong validation because we need 2 different topics from the ttn
+        if((hardwaredata.valid) && (buttondata.valid) || buttondata.valid)
+        { //wrong validation because we need 2 different topics from the ttn, bad solution for now
             return true;
+        }
+        else if(((!hardwaredata.valid) && (!buttondata.valid))){
+            console.log("Errors for schemaNewhardware: " + hardwaredata.errors + 
+            "\n" + "Errors for schemaButton: " + buttondata.errors);
+            return false;
         }
         else{
             console.log("Errors for schemaNewhardware: " + hardwaredata.errors + 
