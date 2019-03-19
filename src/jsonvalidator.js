@@ -6,20 +6,27 @@ class Jsonvalidator{
         this.data = data;
     };
 /* TEMPORARY FIX FOR VALIDATING BOTH OBJECTS, THIS WILL GIVE ERRORS IN CONSOLE THAT YOU CAN IGNORE */ 
-    checkValidttndata(){
+    checkValidttndatahardware(){
         var ttndata = this.data;
         var hardwaredata = v.validate(ttndata, schemaNewhardware);
-        var buttondata = v.validate(ttndata, schemaButton);
 
-        if(hardwaredata.valid && buttondata.valid){
-            return true;
-        }else {
-            console.log("Errors for schemaHardware: " + hardwaredata.errors + "\n" 
-            + "Errors for schemaButton: " + buttondata.errors);
+        if(!hardwaredata.valid){
+            console.log("Errors for schemaHardware: " + hardwaredata.errors);
             return false;
-        }
+        }return true;
     }
 
+    checkValidttndatabutton(){
+        var ttndata = this.data;
+        var buttondata = v.validate(ttndata, schemaButton);
+
+        if(!buttondata.valid){
+            console.log("Errors for schemaButton: " + buttondata.errors);
+            return false;
+        }return true;
+    }
+
+    
     checkValidclientdata(){ //THIS WILL BE USED IN GROUP GAME
         var clientdata = this.data;
         if(!v.validate(clientdata, schemaObject).valid){

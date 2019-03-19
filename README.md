@@ -8,6 +8,8 @@ npm start
 ## Description
 De client.js zal subscriben op de TTN topic en de hardware topic zodat het 2 objecten krijgt van 2 verschillende topics, daarna wordt de data gevalideerd en doorgestuurd naar de game topic in een JSON object.
 
+##Jsonvalidator.js
+
 ## Running in docker
 ```
 docker build -t vives-projectwerk2-2019/bug-api .

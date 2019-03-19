@@ -33,14 +33,18 @@ client.on('message', function (topic, message) {
     ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
     var jsonv = new Jsonvalidator(ttndata);
 
-    if(jsonv.checkValidttndata()){
+    if(jsonv.checkValidttndatabutton()){
         //PLAYER
         dataObject.Player.username = "TEST"; //this needs to come from db, I still can't work further on this
         dataObject.Player.action = ttndata.action;
         dataObject.Player.movement = ttndata.movement;
         dataObject.Player.dev_id = ttndata.dev_id;
-        
+
+        client.publish('game', JSON.stringify(dataObject));
+        console.log("Publisher: " + JSON.stringify(dataObject));
+    }
         //CONTROLLER
+    if(jsonv.checkValidttndatahardware()){
         dataObject.Controller.id = ttndata.id;
     
         dataObject.Controller.addons[0] = ttndata.add_1;
