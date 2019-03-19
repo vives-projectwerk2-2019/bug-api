@@ -39,9 +39,6 @@ client.on('message', function (topic, message) {
         dataObject.Player.action = ttndata.action;
         dataObject.Player.movement = ttndata.movement;
         dataObject.Player.dev_id = ttndata.dev_id;
-
-        client.publish('game', JSON.stringify(dataObject));
-        console.log("Publisher: " + JSON.stringify(dataObject));
         
         //CONTROLLER
         dataObject.Controller.id = ttndata.id;
