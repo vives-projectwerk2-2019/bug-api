@@ -16,7 +16,8 @@ class Jsonvalidator
 
         if(!(hardwaredata.valid && buttondata.valid))
         {
-            console.log("Errors for schemaHardware: " + hardwaredata.errors);
+            console.log("Errors for schemaHardware: " + hardwaredata.errors + "\n"
+            + "Errors for schemaButton: " + buttondata.errors);
             return false;
         } 
 
@@ -27,7 +28,7 @@ class Jsonvalidator
     { //THIS METHOD WILL BE USED IN GROUP GAME
         var clientdata = this.data;
         var data = v.validate(clientdata, schemaObject);
-        
+
         if(!data.valid)
         {
             console.log("Errors for clientdata: " + data.errors); 
