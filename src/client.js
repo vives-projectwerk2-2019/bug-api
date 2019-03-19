@@ -33,7 +33,7 @@ client.on('message', function (topic, message) {
     ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
     var jsonv = new Jsonvalidator(ttndata);
 
-    if(jsonv.checkValidttndatabutton(ttndata)){
+    if(jsonv.checkValidttndatabutton()){
         //PLAYER
         dataObject.Player.username = "TEST"; //this needs to come from db, I still can't work further on this
         dataObject.Player.action = ttndata.action;
@@ -44,7 +44,7 @@ client.on('message', function (topic, message) {
         console.log("Publisher: " + JSON.stringify(dataObject));
     }
         //CONTROLLER
-    if(jsonv.checkValidttndatahardware(ttndata)){
+    if(jsonv.checkValidttndatahardware()){
         dataObject.Controller.id = ttndata.id;
     
         dataObject.Controller.addons[0] = ttndata.add_1;
