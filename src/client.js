@@ -6,6 +6,8 @@ var ttndata = "";
 
 var Jsonvalidator = require('./jsonvalidator');
 
+var lastButton;
+var lastHardware;
 
 /* The actual data object that needs to be validated before sending to game */
 var dataObject = {
@@ -33,23 +35,34 @@ client.on('message', function (topic, message) {
     ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
     var jsonv = new Jsonvalidator(ttndata);
 
-    if(jsonv.checkValidttndata()){
+    let type = undefined;
+
+    if(jsonv.checkValidttndatabutton()) {
+        type = "button"; //needs a fetch API for later, connecting to kiosk
+        lastButton = ttndata;
+    }
+
+    if(jsonv.checkValidttndatahardware()) {
+        type = "hardware";
+        lastHardware = ttndata;
+    }
+
+    if(type !== undefined){
         //PLAYER
-        dataObject.Player.username = "TEST"; //this needs to come from db, I still can't work further on this
-        dataObject.Player.action = ttndata.action;
-        dataObject.Player.movement = ttndata.movement;
-        dataObject.Player.dev_id = ttndata.dev_id;
-        
+        dataObject.Player.username = ""; //this needs to come from db, I still can't work further on this
+        dataObject.Player.action = lastButton.action;
+        dataObject.Player.movement = lastButton.movement;
+        dataObject.Player.dev_id = lastButton.dev_id;
+
         //CONTROLLER
-        dataObject.Controller.id = ttndata.id;
+        dataObject.Controller.id = lastHardware.id;
     
-        dataObject.Controller.addons[0] = ttndata.add_1;
-        dataObject.Controller.addons[1]= ttndata.add_2;
-        dataObject.Controller.addons[2] = ttndata.add_3;
-        dataObject.Controller.dev_id = ttndata.dev_id;
+        dataObject.Controller.addons[0] = lastHardware.add_1;
+        dataObject.Controller.addons[1]= lastHardware.add_2;
+        dataObject.Controller.addons[2] = lastHardware.add_3;
+        dataObject.Controller.dev_id = lastHardware.dev_id;
 
         client.publish('game', JSON.stringify(dataObject));
         console.log("Publisher: " + JSON.stringify(dataObject));
-    
     }
 })

@@ -1,40 +1,39 @@
 var Validator = require('jsonschema').Validator;
 var v = new Validator();
-class Jsonvalidator
-{
-    constructor(data)
-    {
+class Jsonvalidator{
+    constructor(data){
         this.data = data;
     };
 
 /* VALIDATING BOTH OBJECTS, THIS WILL GIVE ERRORS IN CONSOLE WHEN TRUE THAT CAN BE IGNORED */ 
-    checkValidttndata()
-    {
+    checkValidttndatahardware(){
         var ttndata = this.data;
         var hardwaredata = v.validate(ttndata, schemaNewhardware);
-        var buttondata = v.validate(ttndata, schemaButton);
-
-        if(!(hardwaredata.valid && buttondata.valid))
-        {
-            console.log("Errors for schemaHardware: " + hardwaredata.errors + "\n"
-            + "Errors for schemaButton: " + buttondata.errors);
+        
+        if(!(hardwaredata.valid)){
+            console.log("Errors for schemaHardware: " + hardwaredata.errors);
             return false;
-        } 
+        }return true;
+    }
 
-        return true;
+    checkValidttndatabutton(){
+        var ttndata = this.data;
+        var buttondata = v.validate(ttndata, schemaButton);
+        
+        if(!(buttondata.valid)){
+            console.log("Errors for schemaButton: " + buttondata.errors);
+            return false;
+        }return true;
     }
     
-    checkValidclientdata()
-    { //THIS METHOD WILL BE USED IN GROUP GAME
+    checkValidclientdata(){ //THIS METHOD WILL BE USED IN GROUP GAME
         var clientdata = this.data;
         var data = v.validate(clientdata, schemaObject);
-
-        if(!data.valid)
-        {
+        if(!data.valid){
             console.log("Errors for clientdata: " + data.errors); 
             return false;
-        } 
-        
+        }
+
         return true;
     }
 };
