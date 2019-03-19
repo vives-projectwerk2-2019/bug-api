@@ -1,4 +1,3 @@
-
 var Validator = require('jsonschema').Validator;
 var v = new Validator();
 
@@ -7,28 +6,17 @@ class Jsonvalidator{
         this.data = data;
     };
 /* TEMPORARY FIX FOR VALIDATING BOTH OBJECTS, THIS WILL GIVE ERRORS IN CONSOLE THAT YOU CAN IGNORE */ 
-    checkValidttndatahardware(){
+    checkValidttndata(){
         var ttndata = this.data;
         var hardwaredata = v.validate(ttndata, schemaNewhardware);
-
-        if(!hardwaredata.valid){
-            console.log("Errors for schemaButton: " + hardwaredata.errors);
-            return false;
-        }else {
-            return hardwaredata.valid;
-        }
-    }
-
-    checkValidttndatabutton(){
-        var ttndata = this.data;
         var buttondata = v.validate(ttndata, schemaButton);
-        //.valid is needed to check if it's correct, tested that!
-        if(!buttondata.valid)
-        {
-            console.log("Errors for schemaButton: " + buttondata.errors);
-            return false;
+
+        if(hardwaredata.valid && buttondata.valid){
+            return true;
         }else {
-            return buttondata.valid;
+            console.log("Errors for schemaHardware: " + hardwaredata.errors + "\n" 
+            + "Errors for schemaButton: " + buttondata.errors);
+            return false;
         }
     }
 
