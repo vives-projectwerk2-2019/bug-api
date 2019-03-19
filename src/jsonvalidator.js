@@ -32,7 +32,8 @@ class Jsonvalidator{
         }
     }
 
-    checkValidclientdata(clientdata){ //THIS WILL BE USED IN GROUP GAME
+    checkValidclientdata(){ //THIS WILL BE USED IN GROUP GAME
+        var clientdata = this.data;
         if(!v.validate(clientdata, schemaObject).valid){
             console.log("Errors for clientdata: " + v.validate(clientdata, schemaObject).errors); 
             return false;
