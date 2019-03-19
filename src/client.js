@@ -26,6 +26,7 @@ var dataObject = {
 //This will subscribe the client on TTN and publish the right JSON object to game server!
 client.on('connect', function () {
         client.subscribe('TTN');
+        client.subscribe('hardware');
 })
 // data validation ttn doesnt validate due to lazy evaluation
 client.on('message', function (topic, message) {
