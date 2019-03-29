@@ -80,7 +80,8 @@ var jsonschemaPlayer = {
             "type": ["string", null]
         },
         "joined": {"type": "boolean"},
-    }
+    },
+    "required": ["dev_id"]
 };
 
 /* Split schema for Controller */
@@ -96,7 +97,8 @@ var jsonschemaController = {
             }
         },
         "dev_id": {"type": "string"}
-    }
+    },
+    "required": ["id", "addons", "dev_id"]
 };
 
 /* JSON schema for JSON object 'dataObject' */
