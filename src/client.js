@@ -1,9 +1,9 @@
 /*./src/http.js requiren om daarna functies aan te roepen voor deze file */
 var mqtt = require('mqtt');
+var validator = require('bug-jsonv')
 var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST); //ip van de server?
 var ttndata = "";
 //var http = require('./http_request');
-var Jsonvalidator = require('./jsonvalidator');
 var lastButton;
 var lastHardware;
 /* The actual data object that needs to be validated before sending to game */
@@ -31,7 +31,7 @@ client.on('connect', function () {
 // data validation ttn doesnt validate due to lazy evaluation
 client.on('message', function (topic, message) {
     ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
-    var jsonv = new Jsonvalidator(ttndata);
+    var jsonv = new validator(ttndata);
     
     if(jsonv.checkValidttndatabutton()) {
         lastButton = ttndata;
