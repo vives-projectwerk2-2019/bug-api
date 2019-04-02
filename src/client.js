@@ -29,11 +29,11 @@ client.on('connect', function () {
 client.on('message', async (topic, message) => {
     var ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
     var jsonv = new validator(ttndata);
-    
-    var httpdata = await http();
-    console.log(await httpdata);
 
-    if(topic == "TTN" && jsonv.checkValidttndatabutton()) {
+    var httpdata = await http();
+    console.log(await httpdata); //test
+
+    if(topic == "TTN" && jsonv.checkValidttndatabutton()) { //if's need implementations for checking if dev_id's are equal to each other
         //PLAYER
         dataObject.Player.username = ""; //this needs to come from db, I still can't work further on this
         dataObject.Player.action = ttndata.action;
