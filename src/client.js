@@ -1,7 +1,6 @@
-/*./src/http.js requiren om daarna functies aan te roepen voor deze file */
 var mqtt = require('mqtt');
 var validator = require('bug-jsonv')
-var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST); //ip van de server?
+var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST);
 let http = require('./fetch');
 
 var ttndata;
