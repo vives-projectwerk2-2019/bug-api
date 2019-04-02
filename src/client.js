@@ -2,7 +2,7 @@
 var mqtt = require('mqtt');
 var validator = require('bug-jsonv')
 var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST); //ip van de server?
-let http = require('./http_request');
+let http = require('./fetch');
 
 var ttndata;
 var lastButton;
