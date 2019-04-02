@@ -34,6 +34,7 @@ client.on('message', function (topic, message) {
     ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
     var jsonv = new validator(ttndata);
 
+    //working with async methods
     // http(function(data){
     //     ttndata['user'] = data; 
     // })
