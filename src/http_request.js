@@ -1,16 +1,9 @@
-// var urldata = {
-//    host: 'http://localhost:8000/api/user', // need an API token
-//    path: '/acsearch',
-//    method: 'GET'
-// }
+const fetch = require('node-fetch');
 
 /* This will be used to get the right user from the kiosk */
  /* How to get a user with given ID */
-module.exports = async function(callback) {
-   fetch('http://localhost:8000/api/user')
-   .then(response => response.json())
-   .then(data => {
-      console.log(data)
-      callback(data)
-   })
+module.exports = async() => {
+   const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+   const json = await response.json();
+   return json;
 }

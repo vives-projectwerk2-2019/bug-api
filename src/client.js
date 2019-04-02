@@ -2,9 +2,9 @@
 var mqtt = require('mqtt');
 var validator = require('bug-jsonv')
 var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST); //ip van de server?
-var http = require('./http_request');
+let http = require('./http_request');
 
-var ttndata = "";
+var ttndata;
 var lastButton;
 var lastHardware;
 /* The actual data object that needs to be validated before sending to game */
@@ -29,18 +29,16 @@ client.on('connect', function () {
         client.subscribe('hardware');
 })
 
+setInterval(async() => { //setInterval needs to go and this async function needs to be implemented in client.on('message')
+    const data = await http()
+    console.log(data.id)   
+}, 1000)
+
 // data validation ttn doesnt validate due to lazy evaluation
 client.on('message', function (topic, message) {
     ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
     var jsonv = new validator(ttndata);
 
-    //working with async methods
-    // http(function(data){
-    //     ttndata['user'] = data; 
-    // })
-
-    // await userData = http(id);
-    
     if(jsonv.checkValidttndatabutton()) {
         lastButton = ttndata;
         //PLAYER
