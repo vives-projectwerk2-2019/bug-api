@@ -25,20 +25,13 @@ client.on('connect', function () {
         client.subscribe('hardware');
 })
 
-// setInterval(async() => { //setInterval needs to go and this async function needs to be implemented in client.on('message')
-//     const data = await http();
-//     console.log(data.id);
-// }, 1000)
-
 // data validation ttn doesnt validate due to lazy evaluation
-client.on('message', (topic, message) => {
+client.on('message', async (topic, message) => {
     var ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
     var jsonv = new validator(ttndata);
-
-    async() => { //setInterval needs to go and this async function needs to be implemented in client.on('message')
-        const data = await http();
-        console.log(data);
-    }
+    
+    var httpdata = await http();
+    console.log(await httpdata);
 
     if(topic == "TTN" && jsonv.checkValidttndatabutton()) {
         //PLAYER
