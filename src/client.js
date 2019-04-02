@@ -29,8 +29,8 @@ client.on('connect', function () {
 })
 
 setInterval(async() => { //setInterval needs to go and this async function needs to be implemented in client.on('message')
-    const data = await http()
-    console.log(data.id)   
+    const data = await http();
+    console.log(data.id);
 }, 1000)
 
 // data validation ttn doesnt validate due to lazy evaluation
