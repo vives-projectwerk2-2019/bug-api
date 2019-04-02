@@ -3,9 +3,6 @@ var validator = require('bug-jsonv')
 var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST);
 let http = require('./fetch');
 
-var ttndata;
-var lastButton;
-var lastHardware;
 /* The actual data object that needs to be validated before sending to game */
 var dataObject = {
     Player: {
@@ -28,33 +25,36 @@ client.on('connect', function () {
         client.subscribe('hardware');
 })
 
-setInterval(async() => { //setInterval needs to go and this async function needs to be implemented in client.on('message')
-    const data = await http();
-    console.log(data.id);
-}, 1000)
+// setInterval(async() => { //setInterval needs to go and this async function needs to be implemented in client.on('message')
+//     const data = await http();
+//     console.log(data.id);
+// }, 1000)
 
 // data validation ttn doesnt validate due to lazy evaluation
-client.on('message', function (topic, message) {
-    ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
+client.on('message', (topic, message) => {
+    var ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
     var jsonv = new validator(ttndata);
 
-    if(jsonv.checkValidttndatabutton()) {
-        lastButton = ttndata;
-        //PLAYER
-        dataObject.Player.username = ""; //this needs to come from db, I still can't work further on this
-        dataObject.Player.action = lastButton.action;
-        dataObject.Player.movement = lastButton.movement;
-        dataObject.Player.dev_id = lastButton.dev_id;
+    async() => { //setInterval needs to go and this async function needs to be implemented in client.on('message')
+        const data = await http();
+        console.log(data);
     }
 
-    if(jsonv.checkValidttndatahardware()) {
-        lastHardware = ttndata;
+    if(topic == "TTN" && jsonv.checkValidttndatabutton()) {
+        //PLAYER
+        dataObject.Player.username = ""; //this needs to come from db, I still can't work further on this
+        dataObject.Player.action = ttndata.action;
+        dataObject.Player.movement = ttndata.movement;
+        dataObject.Player.dev_id = ttndata.dev_id;
+    }
+
+    if(topic == "hardware" && jsonv.checkValidttndatahardware()) {
         //CONTROLLER
-        dataObject.Controller.id = lastHardware.id;
-        dataObject.Controller.addons[0] = lastHardware.add_1;
-        dataObject.Controller.addons[1]= lastHardware.add_2;
-        dataObject.Controller.addons[2] = lastHardware.add_3;
-        dataObject.Controller.dev_id = lastHardware.dev_id;
+        dataObject.Controller.id = ttndata.id;
+        dataObject.Controller.addons[0] = ttndata.add_1;
+        dataObject.Controller.addons[1]= ttndata.add_2;
+        dataObject.Controller.addons[2] = ttndata.add_3;
+        dataObject.Controller.dev_id = ttndata.dev_id;
     }
 
     client.publish('game', JSON.stringify(dataObject));
