@@ -17,39 +17,29 @@ var dataObject = {
 };
 
 class Data {
-    constructor(data, topic, httpdata) {
-        this.data = data;
-        this.topic = topic;
-        this.httpdata = httpdata;
+    constructor() {
     };
 
-    checkAndProcess() {
-        var jsonv = new validator(this.data);
+    checkAndProcess(data, topic, httpdata) {
+        var jsonv = new validator(data);
         //var userData = checkhttpdata();
 
-        if (this.topic == "TTN" && jsonv.checkValidttndatabutton()) {
-            dataObject.Player.username = this.httpdata.name;
-            dataObject.Player.action = this.data.action;
-            dataObject.Player.movement = this.data.movement;
-            dataObject.Player.dev_id = this.data.dev_id;
+        if (topic == "TTN" && jsonv.checkValidttndatabutton()) {
+            dataObject.Player.username = httpdata.name;
+            dataObject.Player.action = data.action;
+            dataObject.Player.movement = data.movement;
+            dataObject.Player.dev_id = data.dev_id;
         }
-        if (this.topic == "hardware" && jsonv.checkValidttndatahardware()) {
+        if (topic == "hardware" && jsonv.checkValidttndatahardware()) {
             //CONTROLLER
-            dataObject.Controller.id = this.data.id;
-            dataObject.Controller.addons[0] = this.data.add_1;
-            dataObject.Controller.addons[1] = this.data.add_2;
-            dataObject.Controller.addons[2] = this.data.add_3;
-            dataObject.Controller.dev_id = this.data.dev_id;
+            dataObject.Controller.id = data.id;
+            dataObject.Controller.addons[0] = data.add_1;
+            dataObject.Controller.addons[1] = data.add_2;
+            dataObject.Controller.addons[2] = data.add_3;
+            dataObject.Controller.dev_id = data.dev_id;
         }
         return dataObject;
     }
-
-    checkhttpdata()
-    { 
-        //this will need to check the value of dev_id and compare it with the one of ttndata
-        //also will have to return true or false / or we can return the object so we can access it in checkAndProcess()
-    }
-
 };
 
 module.exports = Data;
