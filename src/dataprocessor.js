@@ -25,6 +25,7 @@ class Data {
 
     checkAndProcess() {
         var jsonv = new validator(this.data);
+        //var userData = checkhttpdata();
 
         if (this.topic == "TTN" && jsonv.checkValidttndatabutton()) {
             dataObject.Player.username = this.httpdata.name;
@@ -41,6 +42,12 @@ class Data {
             dataObject.Controller.dev_id = this.data.dev_id;
         }
         return dataObject;
+    }
+
+    checkhttpdata()
+    { 
+        //this will need to check the value of dev_id and compare it with the one of ttndata
+        //also will have to return true or false / or we can return the object so we can access it in checkAndProcess()
     }
 
 };
