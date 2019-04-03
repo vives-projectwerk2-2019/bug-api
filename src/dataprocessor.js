@@ -27,7 +27,7 @@ class Data {
         var jsonv = new validator(this.data);
 
         if (this.topic == "TTN" && jsonv.checkValidttndatabutton()) {
-            dataObject.Player.username = this.httpdata.title;
+            dataObject.Player.username = this.httpdata.name;
             dataObject.Player.action = this.data.action;
             dataObject.Player.movement = this.data.movement;
             dataObject.Player.dev_id = this.data.dev_id;
