@@ -25,7 +25,7 @@ client.on('connect', function () {
         client.subscribe('hardware');
 })
 
-// data validation ttn doesnt validate due to lazy evaluation
+
 client.on('message', async (topic, message) => {
     var ttndata = JSON.parse(message.toString()); //message will be a JSON string need to parse
     var jsonv = new validator(ttndata);
