@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const ids = require('./client');
 
-var url = 'https://jsonplaceholder.typicode.com/todos/1'; //needs url from API endpoint?
+var url = 'http://localhost:8000/api/'+ ids.dev_id + '/' + ids.user_dongle_id; 
 
 /* This will be used to get the right user from the kiosk */
 module.exports = async() => {
@@ -11,9 +11,12 @@ module.exports = async() => {
       headers: {
          "Content-type": "application/json",
       },
-      body: JSON.stringify(ids), //needs to get dev_id
-
    }); 
+   // response.catch(function(error){
+   //    console.log(error);
+   // })
    const json = await response.json();
    return json;
 }
+
+
