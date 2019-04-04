@@ -1,28 +1,26 @@
-var mqtt = require('mqtt');
-var client  = mqtt.connect('mqtt://' + process.env.BROKER_HOST);
-let http = require('./fetch');
-const processdata = require('./dataprocessor')
-
+var mqtt = require("mqtt");
+var client = mqtt.connect("mqtt://" + process.env.BROKER_HOST);
+let http = require("./fetch");
+const processdata = require("./dataprocessor");
 
 //This will subscribe the client on ttn and publish the right JSON object to game server!
-client.on('connect', function () {
-        client.subscribe('ttn');
-        client.subscribe('hardware');
-})
+client.on("connect", function() {
+  client.subscribe("ttn");
+  client.subscribe("hardware");
+});
 
-client.on('message', async (topic, message) => {
-    
-    var ttndata = JSON.parse(message.toString()); //parsing
-    
-    var p = new processdata();
-    var httpdata = await http(ttndata.dev_id, ttndata.id); //fetching data
+client.on("message", async (topic, message) => {
+  var ttndata = JSON.parse(message.toString()); //parsing
 
-    if(topic == "ttn"){ //sending logger info to Jop
-        client.publish('logger', JSON.stringify(ttndata));
-    }
+  var p = new processdata();
+  var httpdata = await http(ttndata.dev_id, ttndata.id); //fetching data
 
-    var dataobj = p.checkAndProcess(ttndata, topic, httpdata);
-   
-    client.publish('game', JSON.stringify(dataobj));
-    console.log("Publisher: " + JSON.stringify(dataobj));
-})
+  if (topic == "ttn") {
+    client.publish("logger", JSON.stringify(ttndata));
+  }
+
+  var dataobj = p.checkAndProcess(ttndata, topic, httpdata);
+
+  client.publish("game", JSON.stringify(dataobj));
+  console.log("Publisher: " + JSON.stringify(dataobj));
+});
