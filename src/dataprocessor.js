@@ -22,7 +22,7 @@ class Data {
         var jsonv = new validator(data);
         //var userData = checkhttpdata();
 
-        if (topic == "TTN" && jsonv.checkValidttndatabutton()) {
+        if (topic == "ttn" && jsonv.checkValidttndatabutton()) {
             dataObject.Player.username = httpdata.name;
             dataObject.Player.action = data.action;
             dataObject.Player.movement = data.movement;

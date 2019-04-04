@@ -4,9 +4,9 @@ let http = require('./fetch');
 const processdata = require('./dataprocessor')
 
 
-//This will subscribe the client on TTN and publish the right JSON object to game server!
+//This will subscribe the client on ttn and publish the right JSON object to game server!
 client.on('connect', function () {
-        client.subscribe('TTN');
+        client.subscribe('ttn');
         client.subscribe('hardware');
 })
 
@@ -20,7 +20,7 @@ client.on('message', async (topic, message) => {
     var p = new processdata();
     var httpdata = await http(); //fetching data
 
-    if(topic == "TTN"){ //sending logger info to Jop
+    if(topic == "ttn"){ //sending logger info to Jop
         client.publish('logger', JSON.stringify(ttndata));
     }
 
