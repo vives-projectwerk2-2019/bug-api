@@ -14,3 +14,5 @@ module.exports = async (dev_id, user_dongle_id) => {
   const json = await response.json();
   return json;
 };
+
+/* Addons door sturen naar kiosk */
