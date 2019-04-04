@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const ids = require('./client');
 
-var url = 'http://localhost:8000/api/'+ ids.dev_id + '/' + ids.user_dongle_id; 
+var url = 'http://localhost:8000/api/session/'+ ids.dev_id + '/' + ids.user_dongle_id; 
 
 /* This will be used to get the right user from the kiosk */
 module.exports = async() => {
