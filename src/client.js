@@ -13,10 +13,13 @@ client.on('connect', function () {
 client.on('message', async (topic, message) => {
     
     var ttndata = JSON.parse(message.toString()); //parsing
-    module.exports = ttndata.dev_id;
+    module.exports = { //for http request
+        "dev_id": ttndata.dev_id,
+        "user_dongle_id": ttndata.id
+    }
     var p = new processdata();
     var httpdata = await http(); //fetching data
-    //console.log(await httpdata);
+
     if(topic == "TTN"){ //sending logger info to Jop
         client.publish('logger', JSON.stringify(ttndata));
     }
