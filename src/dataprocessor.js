@@ -1,5 +1,4 @@
 var validator = require('bug-jsonv');
-
 /* The actual data object that needs to be validated before sending to game */
 var dataObject = {
     Player: {
@@ -15,7 +14,6 @@ var dataObject = {
         dev_id: null
     }
 };
-
 class Data {
     constructor() {
     };
@@ -25,6 +23,7 @@ class Data {
         //var userData = checkhttpdata();
 
         if (topic == "TTN" && jsonv.checkValidttndatabutton()) {
+            //client.publish('logger', JSON.stringify(data));
             dataObject.Player.username = httpdata.name;
             dataObject.Player.action = data.action;
             dataObject.Player.movement = data.movement;

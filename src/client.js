@@ -17,6 +17,9 @@ client.on('message', async (topic, message) => {
     var p = new processdata();
     var httpdata = await http(); //fetching data
     //console.log(await httpdata);
+    if(topic == "TTN"){ //sending logger info to Jop
+        client.publish('logger', JSON.stringify(ttndata));
+    }
 
     var dataobj = p.checkAndProcess(ttndata, topic, httpdata);
    

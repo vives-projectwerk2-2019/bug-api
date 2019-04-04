@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const devid = require('./client');
 
-var url = 'https://jsonplaceholder.typicode.com/todos/1'; //needs url from API endpoint
+var url = 'https://jsonplaceholder.typicode.com/todos/1'; //needs url from API endpoint?
 
 /* This will be used to get the right user from the kiosk */
 module.exports = async() => {
