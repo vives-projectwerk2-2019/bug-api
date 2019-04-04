@@ -23,7 +23,6 @@ class Data {
         //var userData = checkhttpdata();
 
         if (topic == "TTN" && jsonv.checkValidttndatabutton()) {
-            //client.publish('logger', JSON.stringify(data));
             dataObject.Player.username = httpdata.name;
             dataObject.Player.action = data.action;
             dataObject.Player.movement = data.movement;
