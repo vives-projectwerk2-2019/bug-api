@@ -12,9 +12,7 @@ module.exports = async() => {
          "Content-type": "application/json",
       },
    }); 
-   // response.catch(function(error){
-   //    console.log(error);
-   // })
+   
    const json = await response.json();
    return json;
 }
