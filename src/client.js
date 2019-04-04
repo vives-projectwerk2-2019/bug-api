@@ -13,12 +13,9 @@ client.on('connect', function () {
 client.on('message', async (topic, message) => {
     
     var ttndata = JSON.parse(message.toString()); //parsing
-    module.exports = { //for http request
-        "dev_id": ttndata.dev_id,
-        "user_dongle_id": ttndata.id
-    }
+    
     var p = new processdata();
-    var httpdata = await http(); //fetching data
+    var httpdata = await http(ttndata.dev_id, ttndata.id); //fetching data
 
     if(topic == "ttn"){ //sending logger info to Jop
         client.publish('logger', JSON.stringify(ttndata));
