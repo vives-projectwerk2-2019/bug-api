@@ -1,5 +1,7 @@
 var validator = require("bug-jsonv");
 let http = require("./fetch");
+var mqtt = require("mqtt");
+var client = mqtt.connect("mqtt://" + process.env.BROKER_HOST);
 /* The actual data object that needs to be validated before sending to game */
 var dataObject = {
   Player: {
@@ -23,6 +25,7 @@ class Data {
     //var userData = checkhttpdata();
 
     if (topic == "ttn" && jsonv.checkValidttndatabutton()) {
+      client.publish("logger", JSON.stringify(data));
       dataObject.Player.username = httpdata.name;
       dataObject.Player.action = data.action;
       dataObject.Player.movement = data.movement;

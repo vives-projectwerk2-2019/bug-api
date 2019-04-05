@@ -13,13 +13,10 @@ client.on("message", async (topic, message) => {
   var ttndata = JSON.parse(message.toString()); //parsing
 
   var p = new processdata();
-  var httpdata = await http.httpids(ttndata.dev_id, ttndata.id); //fetching data
-
-  if (topic == "ttn") {
-    client.publish("logger", JSON.stringify(ttndata));
-  }
+  var httpdata = await http.httpids(ttndata.dev_id, "00e5818a137df395"); //fetching data
 
   var dataobj = p.checkAndProcess(ttndata, topic, httpdata);
+  await http.httpaddons(dataobj.Controller.addons);
 
   client.publish("game", JSON.stringify(dataobj));
   console.log("Publisher: " + JSON.stringify(dataobj));
