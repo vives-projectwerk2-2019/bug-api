@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 
 /* This will be used to get the right user from the kiosk */
-module.exports = async (dev_id, user_dongle_id) => {
+const httpids = async (dev_id, user_dongle_id) => {
   var url = `http://localhost:8000/api/session/${dev_id}/${user_dongle_id}`;
   const response = await fetch(url, {
     method: "GET",
@@ -16,3 +16,17 @@ module.exports = async (dev_id, user_dongle_id) => {
 };
 
 /* Addons door sturen naar kiosk */
+const httpaddons = async (data) => {
+   var url = `http://localhost:8000/api`; //need different url
+   const response = await fetch(url, {
+     method: "POST",
+     credentials: "same-origin",
+     headers: {
+       "Content-type": "application/json"
+     },
+     body: JSON.stringify(data),
+   });
+};
+
+module.exports.httpids = httpids;
+module.exports.httpaddons = httpaddons;

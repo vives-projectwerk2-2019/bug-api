@@ -13,7 +13,7 @@ client.on("message", async (topic, message) => {
   var ttndata = JSON.parse(message.toString()); //parsing
 
   var p = new processdata();
-  var httpdata = await http(ttndata.dev_id, ttndata.id); //fetching data
+  var httpdata = await http.httpids(ttndata.dev_id, ttndata.id); //fetching data
 
   if (topic == "ttn") {
     client.publish("logger", JSON.stringify(ttndata));

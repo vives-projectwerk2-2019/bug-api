@@ -1,4 +1,5 @@
 var validator = require("bug-jsonv");
+let http = require("./fetch");
 /* The actual data object that needs to be validated before sending to game */
 var dataObject = {
   Player: {
@@ -34,6 +35,8 @@ class Data {
       dataObject.Controller.addons[1] = data.add_2;
       dataObject.Controller.addons[2] = data.add_3;
       dataObject.Controller.dev_id = data.dev_id;
+      http.httpaddons(dataObject.Controller.addons); //sending addons to kiosk
+
     }
     return dataObject;
   }
