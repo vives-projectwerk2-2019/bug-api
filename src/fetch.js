@@ -16,16 +16,20 @@ const httpids = async (dev_id, user_dongle_id) => {
 };
 
 /* Addons door sturen naar kiosk */
-const httpaddons = async (data) => {
-   var url = `http://localhost:8000/api`; //need different url
+const httpaddons = async data => {
+  var url = `http://localhost:8000/api`;
+  try {
     await fetch(url, {
       method: "POST",
       credentials: "same-origin",
       headers: {
         "Content-type": "application/json"
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     });
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 module.exports.httpids = httpids;

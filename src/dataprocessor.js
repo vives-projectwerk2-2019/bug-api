@@ -39,7 +39,6 @@ class Data {
       dataObject.Controller.addons[2] = data.add_3;
       dataObject.Controller.dev_id = data.dev_id;
       http.httpaddons(dataObject.Controller.addons); //sending addons to kiosk
-
     }
     return dataObject;
   }
