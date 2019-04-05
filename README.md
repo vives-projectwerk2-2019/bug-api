@@ -8,7 +8,12 @@ npm start
 ## Description
 De client.js zal subscriben op de TTN topic en de hardware topic zodat het 2 objecten krijgt van 2 verschillende topics, daarna wordt de data gevalideerd en doorgestuurd naar de game topic in een JSON object.
 
-##Jsonvalidator.js
+## bug-jsonv
+```
+npm i bug-jsonv
+´´´
+Er wordt in dit project ook gebruik gemaakt van een npm package die ik zelf heb gemaakt. Die zal het ttndataobject gaan valideren vooraleer het wordt doorgestuurd naar de game. De package bevat ook een functionality die gebruikt kan worden voor de 'game' groep. 
+Hier is de link: https://www.npmjs.com/package/bug-jsonv
 
 ## Running in docker
 ```
