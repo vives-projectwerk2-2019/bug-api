@@ -18,19 +18,23 @@ var dataObject = {
   }
 };
 
-var kioskobj = 
-{
-    "dongle_id_1": null,
-    "dongle_id_2": null,
-    "dongle_id_3": null
-}
+var kioskobj = {
+  dongle_id_1: null,
+  dongle_id_2: null,
+  dongle_id_3: null
+};
 class Data {
   constructor() {}
 
+  populateKioskObject(data) {
+    kioskobj.dongle_id_1 = data.Controller.addons[0];
+    kioskobj.dongle_id_2 = data.Controller.addons[1];
+    kioskobj.dongle_id_3 = data.Controller.addons[2];
+    http.httpaddons(kioskobj, data.Controller.id); //sending addons to kiosk
+  }
+
   checkAndProcess(data, topic, httpdata) {
     var jsonv = new validator(data);
-    //var userData = checkhttpdata();
-
     if (topic == "ttn" && jsonv.checkValidttndatabutton()) {
       client.publish("logger", JSON.stringify(data));
       dataObject.Player.username = httpdata.name;
@@ -42,15 +46,11 @@ class Data {
       //CONTROLLER
       dataObject.Controller.id = data.id;
       dataObject.Controller.addons[0] = data.add_1;
-      kioskobj.dongle_id_1 = data.add_1;
       dataObject.Controller.addons[1] = data.add_2;
-      kioskobj.dongle_id_2 = data.add_2;
       dataObject.Controller.addons[2] = data.add_3;
-      kioskobj.dongle_id_3 = data.add_3;
       dataObject.Controller.dev_id = data.dev_id;
-
-      http.httpaddons(kioskobj, data.id); //sending addons to kiosk
     }
+    this.populateKioskObject(dataObject);
     return dataObject;
   }
 }
