@@ -17,6 +17,13 @@ var dataObject = {
     dev_id: null
   }
 };
+
+var kioskobj = 
+{
+    "dongle_id_1": null,
+    "dongle_id_2": null,
+    "dongle_id_3": null
+}
 class Data {
   constructor() {}
 
@@ -35,10 +42,14 @@ class Data {
       //CONTROLLER
       dataObject.Controller.id = data.id;
       dataObject.Controller.addons[0] = data.add_1;
+      kioskobj.dongle_id_1 = data.add_1;
       dataObject.Controller.addons[1] = data.add_2;
+      kioskobj.dongle_id_2 = data.add_2;
       dataObject.Controller.addons[2] = data.add_3;
+      kioskobj.dongle_id_3 = data.add_3;
       dataObject.Controller.dev_id = data.dev_id;
-      await http.httpaddons(dataObject.Controller.addons, data.id); //sending addons to kiosk
+
+      http.httpaddons(kioskobj, data.id); //sending addons to kiosk
     }
     return dataObject;
   }

@@ -13,7 +13,7 @@ client.on("message", async (topic, message) => {
   var ttndata = JSON.parse(message.toString()); //parsing
 
   var p = new processdata();
-  var httpdata = await http.httpids(ttndata.dev_id, "00e5818a137df395"); //fetching data
+  var httpdata = await http.httpids(ttndata.dev_id, ttndata.id); //fetching data
 
   var dataobj = p.checkAndProcess(ttndata, topic, httpdata);
 
