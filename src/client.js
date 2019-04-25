@@ -16,7 +16,6 @@ client.on("message", async (topic, message) => {
   var httpdata = await http.httpids(ttndata.dev_id, "00e5818a137df395"); //fetching data
 
   var dataobj = p.checkAndProcess(ttndata, topic, httpdata);
-  await http.httpaddons(dataobj.Controller.addons);
 
   client.publish("game", JSON.stringify(dataobj));
   console.log("Publisher: " + JSON.stringify(dataobj));
