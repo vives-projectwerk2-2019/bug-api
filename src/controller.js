@@ -1,4 +1,3 @@
-
 class Controller {
   constructor(playerdata, controllerdata) {
     this.uid = controllerdata.id;

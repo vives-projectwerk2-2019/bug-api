@@ -1,4 +1,3 @@
-
 class Game {
   constructor(client) {
     this.client = client;

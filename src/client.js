@@ -14,7 +14,6 @@ client.on("connect", function() {
 });
 
 client.on("message", async (topic, message) => {
-  
   var ttndata = JSON.parse(message.toString()); //parsing
   var ks = new kiosk(client);
   var gm = new game(client);
