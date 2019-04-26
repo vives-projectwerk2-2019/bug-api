@@ -1,8 +1,11 @@
 var mqtt = require("mqtt");
 var client = mqtt.connect("mqtt://" + process.env.BROKER_HOST);
-let http = require("./fetch");
-const processdata = require("./dataprocessor");
-var user_id;
+
+const validator = require("bug-jsonv");
+var controllers = {};
+const kiosk = require("./kiosk");
+const game = require("./game");
+const controller = require("./controller");
 
 //This will subscribe the client on ttn and publish the right JSON object to game server!
 client.on("connect", function() {
@@ -11,15 +14,21 @@ client.on("connect", function() {
 });
 
 client.on("message", async (topic, message) => {
+  
   var ttndata = JSON.parse(message.toString()); //parsing
-  if (ttndata.id) {
-    user_id = ttndata.id;
+  var ks = new kiosk(client);
+  var gm = new game(client);
+  const jsonv = new validator(ttndata);
+
+  if (topic == "hardware" && jsonv.checkValidttndatahardware()) {
+    var playerdata = await ks.getplayer(ttndata.dev_id, ttndata.id);
+    controllers[ttndata.dev_id] = new controller(playerdata, ttndata);
+  } else if (topic == "ttn" && jsonv.checkValidttndatabutton()) {
+    var controllerdata = controllers[ttndata.dev_id];
+    if (controllerdata) {
+      ks.log(ttndata);
+      ks.sendDongleIds(controllerdata.getDongles(), controllerdata.uid);
+      gm.publishPlayerAction(controllerdata, ttndata.movement, ttndata.action);
+    }
   }
-
-  var p = new processdata();
-  var httpdata = await http.httpids(ttndata.dev_id, user_id); //fetching data
-  var dataobj = p.checkAndProcess(ttndata, topic, httpdata);
-
-  client.publish("game", JSON.stringify(dataobj));
-  console.log("Publisher: " + JSON.stringify(dataobj));
 });
