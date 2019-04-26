@@ -1,5 +1,5 @@
 var mqtt = require("mqtt");
-var client = mqtt.connect("mqtt://" + process.env.BROKER_HOST);
+var client = mqtt.connect(process.env.PROTOCOL_BROKER + process.env.BROKER_HOST);
 
 const validator = require("bug-jsonv");
 var controllers = {};

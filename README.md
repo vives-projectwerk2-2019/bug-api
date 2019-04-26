@@ -6,7 +6,7 @@ npm install
 npm start
 ```
 ## Description
-De client.js zal subscriben op de TTN topic en de hardware topic zodat het 2 objecten krijgt van 2 verschillende topics, daarna wordt de data gevalideerd en doorgestuurd naar de game topic in een JSON object.
+De client.js zal subscriben op de ttn topic en de hardware topic zodat het 2 objecten krijgt van 2 verschillende topics, daarna wordt de data gevalideerd en doorgestuurd naar de game topic in een JSON object.
 
 ## bug-jsonv
 ```
