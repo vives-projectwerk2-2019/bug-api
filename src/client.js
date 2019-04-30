@@ -15,6 +15,7 @@ client.on("connect", function() {
 
 client.on("message", async (topic, message) => {
   var ttndata = JSON.parse(message.toString()); //parsing
+  console.log(ttndata); //testing incoming object
   var ks = new kiosk(client);
   var gm = new game(client);
   const jsonv = new validator(ttndata);
