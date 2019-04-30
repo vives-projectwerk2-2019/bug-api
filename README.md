@@ -7,7 +7,7 @@ npm i bug-jsonv
 Er wordt in dit project ook gebruik gemaakt van een npm package die ik zelf heb gemaakt. Die zal het ttndataobject gaan valideren vooraleer het wordt doorgestuurd naar de game. De package bevat ook een functionality die gebruikt kan worden voor de 'game' groep. 
 Hier is de link: https://www.npmjs.com/package/bug-jsonv
 
-##install node-fetch
+## install node-fetch
 ```
 npm i node-fetch
 ```
