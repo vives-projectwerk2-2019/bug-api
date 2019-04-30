@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 
 /* This will be used to get the right user from the kiosk */
 const httpids = async (dev_id, user_dongle_id) => {
-  var url = `http://localhost:8000/api/session/${dev_id}/${user_dongle_id}`;
+  var url = process.env.PROTOCOL_BROKER + process.env.BROKER_HOST + `/api/session/${dev_id}/${user_dongle_id}`; //http://localhost:8000/api/session/
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -21,7 +21,7 @@ const httpids = async (dev_id, user_dongle_id) => {
 
 /* Addons door sturen naar kiosk */
 const httpaddons = async (data, user_dongle_id) => {
-  var url = `http://localhost:8000//api/activate_dongle/${user_dongle_id}`;
+  var url = process.env.PROTOCOL_BROKER + process.env.BROKER_HOST + `/api/activate_dongle/${user_dongle_id}`;
   try {
     await fetch(url, {
       method: "POST",
