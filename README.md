@@ -1,5 +1,21 @@
 # bug-api
 
+## install bug-jsonv
+```
+npm i bug-jsonv
+```
+Er wordt in dit project ook gebruik gemaakt van een npm package die ik zelf heb gemaakt. Die zal het ttndataobject gaan valideren vooraleer het wordt doorgestuurd naar de game. De package bevat ook een functionality die gebruikt kan worden voor de 'game' groep. 
+Hier is de link: https://www.npmjs.com/package/bug-jsonv
+
+##install node-fetch
+```
+npm i node-fetch
+```
+or
+``` 
+npm install node-fetch --save
+```
+
 ## Running
 ```
 npm install
@@ -28,11 +44,6 @@ docker run -p 8080:8080 vives-projectwerk2-2019/bug-api
 ```
 The `-p` flag can be set to `customPort:8080`, `-d` will detatch the container from your shell.
 
-## bug-jsonv
-```
-npm i bug-jsonv
-´´´
-Er wordt in dit project ook gebruik gemaakt van een npm package die ik zelf heb gemaakt. Die zal het ttndataobject gaan valideren vooraleer het wordt doorgestuurd naar de game. De package bevat ook een functionality die gebruikt kan worden voor de 'game' groep. 
-Hier is de link: https://www.npmjs.com/package/bug-jsonv
+
 
 
